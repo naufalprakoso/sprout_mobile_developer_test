@@ -6,6 +6,7 @@ import 'package:sprout_mobile_developer_test/features/pokemon/domain/usecases/do
 
 class PokemonController extends GetxController {
   Rx<BaseStateV2<List<PokemonModel>>> pokemonModel = BaseStateV2<List<PokemonModel>>().obs;
+  int dataSize = 8;
 
   Future fetchPokemon(BuildContext context) async {
     pokemonModel.value = pokemonModel.value.copyWith(
@@ -13,26 +14,27 @@ class PokemonController extends GetxController {
     );
 
     List<PokemonModel> allPokemon = [];
-    int dataSize = 50;
+    bool isAnyFetchFailed = false;
 
     for (int i = 1; i <= dataSize; i++) {
       final api = await DoFetchPokemon().call(i);
-
       api.fold(
             (l) {
-          pokemonModel.value = pokemonModel.value
-              .copyWith(status: StatusState.error, message: l.message);
-          return;
+          isAnyFetchFailed = true;
+          pokemonModel.value = pokemonModel.value.copyWith(
+              status: StatusState.error,
+              message: l.message
+          );
         },
-            (r) {
-          allPokemon.add(r);
-        },
+            (r) => allPokemon.add(r),
       );
     }
-    print("Check Success");
-    pokemonModel.value = pokemonModel.value.copyWith(
-      status: StatusState.success,
-      data: allPokemon,
-    );
+
+    if (!isAnyFetchFailed) {
+      pokemonModel.value = pokemonModel.value.copyWith(
+        status: StatusState.success,
+        data: allPokemon,
+      );
+    }
   }
 }

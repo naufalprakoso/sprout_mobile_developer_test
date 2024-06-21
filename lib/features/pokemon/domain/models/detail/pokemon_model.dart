@@ -23,9 +23,13 @@ class PokemonModel extends Equatable {
     return PokemonModel(
       id: json['id'] as int,
       name: json['name'] as String,
-      sprites: json['sprites'] as SpritesModel,
-      stats: json['stats'] as List<StatsModel>,
-      abilities: json['abilities'] as List<AbilitiesModel>,
+      sprites: SpritesModel.fromJson(json['sprites'] as Map<String, dynamic>),
+      stats: (json['stats'] as List<dynamic>)
+          .map((statJson) => StatsModel.fromJson(statJson as Map<String, dynamic>))
+          .toList(),
+      abilities: (json['abilities'] as List<dynamic>)
+          .map((abilityJson) => AbilitiesModel.fromJson(abilityJson as Map<String, dynamic>))
+          .toList(),
     );
   }
 

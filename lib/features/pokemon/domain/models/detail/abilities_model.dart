@@ -12,7 +12,7 @@ class AbilitiesModel extends Equatable {
   factory AbilitiesModel.fromJson(Map<String, dynamic> json) {
     return AbilitiesModel(
       isHidden: json['is_hidden'] as bool,
-      ability: json['ability'] as AbilityModel,
+      ability: AbilityModel.fromJson(json['ability'] as Map<String, dynamic>),
     );
   }
 

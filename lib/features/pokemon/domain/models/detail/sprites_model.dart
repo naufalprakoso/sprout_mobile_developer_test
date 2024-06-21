@@ -9,7 +9,7 @@ class SpritesModel extends Equatable {
 
   factory SpritesModel.fromJson(Map<String, dynamic> json) {
     return SpritesModel(
-      other: json['other'] as OtherSpritesModel,
+      other: OtherSpritesModel.fromJson(json['other'] as Map<String, dynamic>),
     );
   }
 
@@ -28,7 +28,7 @@ class OtherSpritesModel extends Equatable {
 
   factory OtherSpritesModel.fromJson(Map<String, dynamic> json) {
     return OtherSpritesModel(
-      officialArtwork: json['official-artwork'] as OfficialArtworkSpritesModel,
+      officialArtwork: OfficialArtworkSpritesModel.fromJson(json['official-artwork'] as Map<String, dynamic>),
     );
   }
 
