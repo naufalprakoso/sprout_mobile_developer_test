@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sprout_mobile_developer_test/core/errors/api_exception.dart';
+
+import 'dio_module.dart';
+import 'result.dart';
 
 abstract class NetworkModule {
   BaseOptions? options;
@@ -36,113 +38,11 @@ abstract class NetworkModule {
   Future<dynamic>? getMethod(
     String endpoint, {
     Map<String, dynamic>? param,
-    Map<String, dynamic>? headers,
-    bool? withAccessToken,
   }) async {
-    Map<String, dynamic>? mHeaders = headers;
-    if (withAccessToken == true) {
-      final prefs = await SharedPreferences.getInstance();
-      final accessToken = prefs.getString(SharedPref.authToken) ?? '';
-      if (mHeaders != null) {
-        mHeaders["Authorization"] = "Bearer $accessToken";
-      } else {
-        mHeaders = {"Authorization": "Bearer $accessToken"};
-      }
-    }
-
-    var options = Options(headers: mHeaders);
     var response = await _safeCallApi(
       _dio.get(
         endpoint,
         queryParameters: param,
-        options: options,
-      ),
-    );
-
-    return responseHandler(response);
-  }
-
-  Future<dynamic>? postMethod(
-    String endpoint, {
-    Map<String, dynamic>? body,
-    Map<String, dynamic>? headers,
-    bool? withAccessToken,
-  }) async {
-    Map<String, dynamic>? mHeaders = headers;
-    if (withAccessToken == true) {
-      final prefs = await SharedPreferences.getInstance();
-      final accessToken = prefs.getString(SharedPref.authToken) ?? '';
-      if (mHeaders != null) {
-        mHeaders["Authorization"] = "Bearer $accessToken";
-      } else {
-        mHeaders = {"Authorization": "Bearer $accessToken"};
-      }
-    }
-
-    var options = Options(headers: mHeaders);
-    var response = await _safeCallApi(
-      _dio.post(
-        endpoint,
-        data: body,
-        options: options,
-      ),
-    );
-
-    return responseHandler(response);
-  }
-
-  Future<dynamic>? patchMethod(
-    String endpoint, {
-    Map<String, dynamic>? body,
-    Map<String, dynamic>? headers,
-    bool? withAccessToken,
-  }) async {
-    Map<String, dynamic>? mHeaders = headers;
-    if (withAccessToken == true) {
-      final prefs = await SharedPreferences.getInstance();
-      final accessToken = prefs.getString(SharedPref.authToken) ?? '';
-      if (mHeaders != null) {
-        mHeaders["Authorization"] = "Bearer $accessToken";
-      } else {
-        mHeaders = {"Authorization": "Bearer $accessToken"};
-      }
-    }
-
-    var options = Options(headers: mHeaders);
-    var response = await _safeCallApi(
-        _dio.patch(
-        endpoint,
-        data: body,
-        options: options,
-        ),
-    );
-
-    return responseHandler(response);
-  }
-
-  Future<dynamic>? deleteMethod(
-      String endpoint, {
-        Map<String, dynamic>? body,
-        Map<String, dynamic>? headers,
-        bool? withAccessToken,
-      }) async {
-    Map<String, dynamic>? mHeaders = headers;
-    if (withAccessToken == true) {
-      final prefs = await SharedPreferences.getInstance();
-      final accessToken = prefs.getString(SharedPref.authToken) ?? '';
-      if (mHeaders != null) {
-        mHeaders["Authorization"] = "Bearer $accessToken";
-      } else {
-        mHeaders = {"Authorization": "Bearer $accessToken"};
-      }
-    }
-
-    var options = Options(headers: mHeaders);
-    var response = await _safeCallApi(
-      _dio.delete(
-        endpoint,
-        data: body,
-        options: options,
       ),
     );
 
