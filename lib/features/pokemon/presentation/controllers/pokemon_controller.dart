@@ -6,7 +6,7 @@ import 'package:sprout_mobile_developer_test/features/pokemon/domain/usecases/do
 
 class PokemonController extends GetxController {
   Rx<BaseStateV2<List<PokemonModel>>> pokemonModel = BaseStateV2<List<PokemonModel>>().obs;
-  int dataSize = 8;
+  int dataSize = 4;
 
   Future fetchPokemon(BuildContext context) async {
     pokemonModel.value = pokemonModel.value.copyWith(

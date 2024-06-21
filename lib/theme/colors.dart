@@ -20,10 +20,7 @@ class ColorsPalette {
 
   static const darkGreyTextColor = Color(0xFFA0A7AF);
   static const darkGreyHintColor = Color(0xFF677178);
-  static const pinBackgroundColor = Color(0xFFE5E5E5);
   static const lightGreyBackground = Color(0xFFEFF3F5);
   static const textWhite = Color(0xFFFFFFFF);
   static const blackText = Color(0xFF191B1D);
-
-  static const availableGreen = Color(0xFF38D363);
 }

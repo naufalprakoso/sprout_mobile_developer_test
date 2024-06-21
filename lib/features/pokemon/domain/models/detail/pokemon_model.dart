@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:sprout_mobile_developer_test/features/pokemon/domain/models/detail/types_model.dart';
 
 import 'abilities_model.dart';
 import 'sprites_model.dart';
@@ -10,6 +11,7 @@ class PokemonModel extends Equatable {
   final SpritesModel sprites;
   final List<StatsModel> stats;
   final List<AbilitiesModel> abilities;
+  final List<TypesModel> types;
 
   const PokemonModel({
     required this.id,
@@ -17,6 +19,7 @@ class PokemonModel extends Equatable {
     required this.sprites,
     required this.stats,
     required this.abilities,
+    required this.types,
   });
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) {
@@ -30,6 +33,9 @@ class PokemonModel extends Equatable {
       abilities: (json['abilities'] as List<dynamic>)
           .map((abilityJson) => AbilitiesModel.fromJson(abilityJson as Map<String, dynamic>))
           .toList(),
+      types: (json['types'] as List<dynamic>)
+          .map((typeJson) => TypesModel.fromJson(typeJson as Map<String, dynamic>))
+          .toList(),
     );
   }
 
@@ -40,5 +46,6 @@ class PokemonModel extends Equatable {
     sprites,
     stats,
     abilities,
+    types,
   ];
 }
