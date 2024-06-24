@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sprout_mobile_developer_test/core/utils/base_state_v2.dart';
 import 'package:sprout_mobile_developer_test/features/pokemon/presentation/controllers/pokemon_controller.dart';
+import 'package:sprout_mobile_developer_test/routes/args/pokemon_detail_args.dart';
+import 'package:sprout_mobile_developer_test/routes/main_route.dart';
 
 import 'item_pokemon.dart';
 

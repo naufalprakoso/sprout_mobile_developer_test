@@ -36,7 +36,7 @@ class ItemPokemon extends StatelessWidget {
                 pokemon.sprites.other.officialArtwork.frontDefault,
                 fit: BoxFit.cover,
                 width: double.infinity,
-                height: 150,
+                height: 200,
               ),
             ),
             Padding(
@@ -65,8 +65,8 @@ class ItemPokemon extends StatelessWidget {
               child: Wrap(
                 spacing: 4.0,
                 runSpacing: 4.0,
-                children: pokemon.abilities.map((abilityModel) => Chip(
-                  label: Text(abilityModel.ability.name.capitalizeFirstChar()),
+                children: pokemon.types.map((typesModel) => Chip(
+                  label: Text(typesModel.type.name.capitalizeFirstChar()),
                   labelPadding: const EdgeInsets.symmetric(horizontal: 8.0),
                   labelStyle: TextStyle(fontSize: 11, color: ColorsPalette.darkGrey),
                   shape: const StadiumBorder(side: BorderSide(style: BorderStyle.none)),
